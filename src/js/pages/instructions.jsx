@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import GameRulesForm from '../components/gamesRulesForm';
+import {addTypeToPlayer} from '../actions/players';
+import {addNewGameRules} from '../actions/game';
+
 
 class Instructions extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.state = store.getState();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -12,16 +17,58 @@ class Instructions extends Component {
     e.preventDefault();
 
     const {gameModality, gameType} = e.target.elements;
-
-    this.setGameRules({
+    const rules = {
       gameModality: gameModality.value,
       gameType: gameType.value
-    });
+    };
+
+    this.storeAddNewGameRules(rules);
+    this.storeAddTypeToPlayer(rules.gameModality);
+    this.navigateTo('/countdown');
   }
 
-  setGameRules(rules) {
-    //TODO: Action to set Game modality
-    console.log('Setting game Modality: ', rules);
+  navigateTo(path) {
+    this.props.history.push(path);
+  }
+
+  storeAddTypeToPlayer(gameModality) {
+      switch (gameModality) {
+        case 'mvsm':
+          // set all players as cpu
+          this.state.players
+            .map(player => store.dispatch(
+              addTypeToPlayer({id: player.id, type: 'cpu'})
+              ));
+          break;
+        case 'hvsm':
+          // set player left as human
+          this.state.players
+            .filter(player => player.gameSide === 'left')
+            .map(player => store.dispatch(
+              addTypeToPlayer({id: player.id, type: 'human'})
+            ));
+
+          // set player right as cpu
+          this.state.players
+            .filter(player => player.gameSide === 'right')
+            .map(player => store.dispatch(
+              addTypeToPlayer({id: player.id, type: 'cpu'})
+            ));
+          break;
+        case 'hvsh':
+          // set all players as human
+          this.state.players
+            .map(player => store.dispatch(
+              addTypeToPlayer({id: player.id, type: 'human'})
+            ));
+          break;
+        default:
+          throw ('Unrecognized game modality');
+      }
+  }
+
+  storeAddNewGameRules(rules) {
+    store.dispatch(addNewGameRules(rules));
   }
 
   render() {
