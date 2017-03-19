@@ -2,13 +2,8 @@ require('../css/main.scss');
 
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import routes from './routes';
 
-class TestJsxConfig extends Component{
-  render() {
-    return (
-      <h1> React config Works :) </h1>
-    );
-  }
-}
+window.React = React;
 
-render(<TestJsxConfig />, document.getElementById('app'));
+render(routes, document.getElementById('app'));
