@@ -16,10 +16,10 @@ module.exports = {
 		modules: [
 			path.resolve('./node_modules')
 		],
-		extensions: ['.js']
+		extensions: ['.js', '.jsx']
 	},
 	entry: {
-		'main': './src/js/main.js'
+		'main': './src/js/main.jsx'
 	},
 	output: {
 		path: path.join(process.cwd(), 'build'),
@@ -52,7 +52,7 @@ module.exports = {
 			test: /\.css$/,
 			use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
-				use: 'css-loader'
+				use: ['css-loader']
 			})
 		},{
 			test: /\.scss$/,
@@ -61,7 +61,15 @@ module.exports = {
 				use: ['css-loader', 'sass-loader']
 			})
 		},{
-			test: /\.js$/,
+			test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+			use: {
+				loader: 'url-loader',
+				options: {
+					limit: 10000
+				}
+			},
+		},{
+			test: /\.jsx$/,
 			exclude: [/node_modules/],
 			use: 'babel-loader'
 		}]
