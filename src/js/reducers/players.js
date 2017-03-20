@@ -12,15 +12,25 @@ const initialState = [
 ];
 
 export default function players(state = initialState, action) {
-  const nextState = [...state];
-
   switch (action.type) {
     case 'ADD_TYPE_TO_PLAYER':
-      nextState
-        .filter(player => player.id === action.payload.id)
-        .map(player => player.type = action.payload.type);
+      return state.map(player =>
+        player.id === action.payload.id ?
+          Object.assign({}, player, {type: action.payload.type}) : player
+      );
 
-      return nextState;
+    case 'ADD_HANDSHAPE_TO_PLAYER':
+      return state.map(player =>
+        player.id === action.payload.id ?
+          Object.assign({}, player, {handShape: action.payload.handShape}) : player
+      );
+
+    case 'ADD_WINNER':
+      return state.map(player =>
+      player.id === action.payload.id ?
+        Object.assign({}, player, {winner: true}) : player
+      );
+
     default:
       return state;
   }

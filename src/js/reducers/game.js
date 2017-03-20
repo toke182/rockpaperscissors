@@ -9,6 +9,7 @@ export default function game(state = initialState, action) {
 
     case 'DECREMENT_SECONDS_REMAINING':
       return Object.assign({}, state, {secondsRemaining: state.secondsRemaining - 1});
+
     default:
       return state;
   }
