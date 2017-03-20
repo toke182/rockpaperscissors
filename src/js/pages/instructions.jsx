@@ -8,11 +8,21 @@ import {addNewGameRules} from '../actions/game';
 
 import * as GameActions from '../actions/game';
 import * as PlayerActions from '../actions/players';
+import * as prevLocationActions from '../actions/prevLocation';
 
 class Instructions extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.gameActions.restoreInitialState();
+    this.props.playerActions.restoreInitialState();
+  }
+
+  componentWillUnmount() {
+    this.props.prevLocationActions.addPrevLocation(this.props.location);
   }
 
   handleSubmit(e) {
@@ -124,19 +134,22 @@ class Instructions extends Component {
 
 function mapStateToProps(state) {
   return {
-    players: state.players
+    players: state.players,
+    prevLocation: state.prevLocation
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     gameActions: bindActionCreators(GameActions, dispatch),
-    playerActions: bindActionCreators(PlayerActions, dispatch)
+    playerActions: bindActionCreators(PlayerActions, dispatch),
+    prevLocationActions: bindActionCreators(prevLocationActions, dispatch),
   };
 }
 
 Instructions.propTypes = {
   playerActions: PropTypes.object.isRequired,
+  prevLocationActions: PropTypes.object.isRequired,
   gameActions: PropTypes.object.isRequired,
   players: PropTypes.array.isRequired
 };

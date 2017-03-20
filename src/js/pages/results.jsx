@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import * as GameActions from '../actions/game';
 import * as PlayerActions from '../actions/players';
+import * as prevLocationActions from '../actions/prevLocation';
 
 class Results extends Component {
   constructor(props){
@@ -13,12 +14,14 @@ class Results extends Component {
   }
 
   componentWillMount() {
-    var {game} = this.props;
+    if (!this.props.prevLocation || this.props.prevLocation.pathname !== '/countdown') {
+      this.navigateTo('/');
+    }
   }
 
   componentWillUnmount() {
-    this.props.gameActions.restoreInitialState();
-    this.props.playerActions.restoreInitialState();
+
+    this.props.prevLocationActions.addPrevLocation(this.props.location);
   }
   navigateTo(path) {
     this.props.history.push(path);
@@ -63,21 +66,24 @@ class Results extends Component {
 
 function mapStateToProps(state) {
   return {
-    players: state.players
+    players: state.players,
+    prevLocation: state.prevLocation
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     gameActions: bindActionCreators(GameActions, dispatch),
-    playerActions: bindActionCreators(PlayerActions, dispatch)
+    playerActions: bindActionCreators(PlayerActions, dispatch),
+    prevLocationActions: bindActionCreators(prevLocationActions, dispatch)
   };
 }
 
 Results.propTypes = {
   playerActions: PropTypes.object,
   gameActions: PropTypes.object,
-  players: PropTypes.array.isRequired
+  prevLocationActions: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

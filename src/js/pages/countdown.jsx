@@ -8,6 +8,7 @@ import {decrementSecondsRemaining} from '../actions/game';
 
 import * as GameActions from '../actions/game';
 import * as PlayerActions from '../actions/players';
+import * as prevLocationActions from '../actions/prevLocation';
 
 class Countdown extends Component {
   constructor(props) {
@@ -99,7 +100,7 @@ class Countdown extends Component {
 
   /*** LifeCycle Methods ***/
   componentWillMount() {
-    if (!this.props.game.gameType || this.props.players.length < 2) {
+    if (!this.props.prevLocation || this.props.prevLocation.pathname !== '/') {
       this.navigateTo('/');
     }
   }
@@ -109,8 +110,8 @@ class Countdown extends Component {
   }
 
   componentWillUnmount() {
-    const {gameActions} = this.props;
-    gameActions.resetSecondsRemaining();
+    this.props.prevLocationActions.addPrevLocation(this.props.location);
+    document.removeEventListener("keydown", this.handleKeyDown);
     clearInterval(this.countdownInterval);
   }
 
@@ -162,7 +163,7 @@ class Countdown extends Component {
 
     if (game.secondsRemaining === 1) {
       if (this.humanPlayers.length > 0) {
-        document.addEventListener("keydown", this.handleKeyDown.bind(this));
+        document.addEventListener("keydown", this.handleKeyDown);
       }
       if (this.cpuPlayers.length > 0) {
         this.addShapesToCpuPlayers();
@@ -171,8 +172,8 @@ class Countdown extends Component {
     } else if (game.secondsRemaining === 0) {
       this.addWinner(players, scoringTable[game.gameType]);
 
+      document.removeEventListener("keydown", this.handleKeyDown);
       clearInterval(this.countdownInterval);
-      document.removeEventListener("keydown", true);
 
       this.navigateTo('/results');
     }
@@ -200,6 +201,7 @@ class Countdown extends Component {
 Countdown.propTypes = {
   playerActions: PropTypes.object.isRequired,
   gameActions: PropTypes.object.isRequired,
+  prevLocationActions: PropTypes.object.isRequired,
   players: PropTypes.array.isRequired,
   game: PropTypes.object.isRequired
 };
@@ -207,14 +209,16 @@ Countdown.propTypes = {
 function mapStateToProps(state) {
   return {
     players: state.players,
-    game: state.game
+    game: state.game,
+    prevLocation: state.prevLocation
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     gameActions: bindActionCreators(GameActions, dispatch),
-    playerActions: bindActionCreators(PlayerActions, dispatch)
+    playerActions: bindActionCreators(PlayerActions, dispatch),
+    prevLocationActions: bindActionCreators(prevLocationActions, dispatch)
   };
 }
 
