@@ -43,13 +43,13 @@ class Results extends Component {
       <div id="game">
         <div className="players-container centered-text">
           <div id="player-1" className="span6">
-            <div className="player-name bold">{playerLeft.type}</div>
-            <div className="shape-name">{playerLeft.handShape}</div>
+            <div className="player-name bold">{playerLeft.type.toUpperCase()}</div>
+            <div className="shape-name">{playerLeft.handShape.toUpperCase()}</div>
             <div className={`shape shape-left ${playerLeft.handShape}`}></div>
           </div>
           <div id="player-2" className="span6">
-            <div className="player-name bold">{playerRight.type}</div>
-            <div className="shape-name">{playerRight.handShape}</div>
+            <div className="player-name bold">{playerRight.type.toUpperCase()}</div>
+            <div className="shape-name">{playerRight.handShape.toUpperCase()}</div>
             <div className={`shape shape-right ${playerRight.handShape}`}></div>
           </div>
         </div>

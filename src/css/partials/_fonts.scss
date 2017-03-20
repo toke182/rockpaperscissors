@@ -1,0 +1,28 @@
+@font-face{
+  font-family: 'opensans-semibold';
+  src: url('../fonts/opensans/opensans-semibold/opensans-semibold-webfont.eot');
+  src: url('../fonts/opensans/opensans-semibold/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/opensans/opensans-semibold/opensans-semibold-webfont.woff') format('woff'),
+  url('../fonts/opensans/opensans-semibold/opensans-semibold-webfont.ttf') format('truetype'),
+  url('../fonts/opensans/opensans-semibold/opensans-semibold-webfont.svg#webfont') format('svg');
+}
+
+/* OPENSANS::Light*/
+@font-face{
+  font-family: 'opensans-light';
+  src: url('../fonts/opensans/opensans-light/opensans-light-webfont.eot');
+  src: url('../fonts/opensans/opensans-light/opensans-light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/opensans/opensans-light/opensans-light-webfont.woff') format('woff'),
+  url('../fonts/opensans/opensans-light/opensans-light-webfont.ttf') format('truetype'),
+  url('../fonts/opensans/opensans-light/opensans-light-webfont.svg#webfont') format('svg');
+}
+
+/* OPENSANS::Bold*/
+@font-face{
+  font-family: 'opensans-bold';
+  src: url('../fonts/opensans/opensans-bold/opensans-bold-webfont.eot');
+  src: url('../fonts/opensans/opensans-bold/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/opensans/opensans-bold/opensans-bold-webfont.woff') format('woff'),
+  url('../fonts/opensans/opensans-bold/opensans-bold-webfont.ttf') format('truetype'),
+  url('../fonts/opensans/opensans-bold/opensans-bold-webfont.svg#webfont') format('svg');
+}
