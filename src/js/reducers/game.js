@@ -1,20 +1,14 @@
-const initialState = [{
-  gameModality: 'hsvm',
-  gameType: 'classic',
-  gameWinner: {
-    id: 0,
-    type: 'human',
-    handShape: 'rock',
-    gameSide: 'left'
-  }
-}];
+const initialState = {
+  secondsRemaining: 3
+};
 
 export default function game(state = initialState, action) {
   switch (action.type) {
     case 'ADD_NEW_GAME_RULES':
-      console.log('Payload: ', action.payload);
-      return action.payload;
+      return Object.assign({}, state, action.payload);
 
+    case 'DECREMENT_SECONDS_REMAINING':
+      return Object.assign({}, state, {secondsRemaining: state.secondsRemaining - 1});
     default:
       return state;
   }

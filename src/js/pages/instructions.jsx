@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {render} from 'react-dom';
 import GameRulesForm from '../components/gamesRulesForm';
 import {addTypeToPlayer} from '../actions/players';
 import {addNewGameRules} from '../actions/game';
 
+import * as GameActions from '../actions/game';
+import * as PlayerActions from '../actions/players';
 
 class Instructions extends Component {
   constructor(props) {
     super(props);
-
-    this.state = store.getState();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -32,35 +34,29 @@ class Instructions extends Component {
   }
 
   storeAddTypeToPlayer(gameModality) {
+      const {players, playerActions} = this.props;
+
       switch (gameModality) {
         case 'mvsm':
           // set all players as cpu
-          this.state.players
-            .map(player => store.dispatch(
-              addTypeToPlayer({id: player.id, type: 'cpu'})
-              ));
+          players
+            .map(player => playerActions.addTypeToPlayer({id: player.id, type: 'cpu'}));
           break;
         case 'hvsm':
           // set player left as human
-          this.state.players
+          players
             .filter(player => player.gameSide === 'left')
-            .map(player => store.dispatch(
-              addTypeToPlayer({id: player.id, type: 'human'})
-            ));
+            .map(player => playerActions.addTypeToPlayer({id: player.id, type: 'human'}));
 
           // set player right as cpu
-          this.state.players
+          players
             .filter(player => player.gameSide === 'right')
-            .map(player => store.dispatch(
-              addTypeToPlayer({id: player.id, type: 'cpu'})
-            ));
+            .map(player => playerActions.addTypeToPlayer({id: player.id, type: 'cpu'}));
           break;
         case 'hvsh':
           // set all players as human
-          this.state.players
-            .map(player => store.dispatch(
-              addTypeToPlayer({id: player.id, type: 'human'})
-            ));
+          players
+            .map(player => playerActions.addTypeToPlayer({id: player.id, type: 'human'}));
           break;
         default:
           throw ('Unrecognized game modality');
@@ -68,7 +64,8 @@ class Instructions extends Component {
   }
 
   storeAddNewGameRules(rules) {
-    store.dispatch(addNewGameRules(rules));
+    const {gameActions} = this.props;
+    gameActions.addNewGameRules(rules);
   }
 
   render() {
@@ -125,4 +122,23 @@ class Instructions extends Component {
   }
 }
 
-export default Instructions;
+function mapStateToProps(state) {
+  return {
+    players: state.players
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    gameActions: bindActionCreators(GameActions, dispatch),
+    playerActions: bindActionCreators(PlayerActions, dispatch)
+  };
+}
+
+Instructions.propTypes = {
+  playerActions: PropTypes.object.isRequired,
+  gameActions: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Instructions);
