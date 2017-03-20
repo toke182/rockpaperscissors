@@ -13,20 +13,39 @@ class Results extends Component {
     super(props);
   }
 
+  /**
+   * LifeCycle
+   * 1. Navigates to instructions in case user didn't input game rules
+   * @return {undefined}
+   */
   componentWillMount() {
     if (!this.props.prevLocation || this.props.prevLocation.pathname !== '/countdown') {
       this.navigateTo('/');
     }
   }
 
+  /**
+   * LifeCycle
+   * 1. Updates store with current location to help with navigation
+   * @return {undefined}
+   */
   componentWillUnmount() {
-
     this.props.prevLocationActions.addPrevLocation(this.props.location);
   }
+
+  /**
+   * Navigates to supplied path
+   * @param {Object} path: The path where to navigate
+   * @return {undefined}
+   */
   navigateTo(path) {
     this.props.history.push(path);
   }
 
+  /**
+   * Shows text about the winner of the match
+   * @return {String} Text to print in view
+   */
   showWinnerText() {
     const winner = this.props.players
       .filter(player => player.winner === true)[0];

@@ -16,15 +16,34 @@ class Instructions extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /**
+   * LifeCycle
+   * Make sure the store is in initial state when hitting this component
+   * @return {undefined}
+   */
   componentWillMount() {
     this.props.gameActions.restoreInitialState();
     this.props.playerActions.restoreInitialState();
   }
 
+  /**
+   * LifeCycle
+   * Adds prev path to store to help with the navigation.
+   * e.g: disallow users to navigate directly to the other components
+   * @return {undefined}
+   */
   componentWillUnmount() {
     this.props.prevLocationActions.addPrevLocation(this.props.location);
   }
 
+  /**
+   * Event Handler for form submission
+   * 1. Updates store with game rules
+   * 2. Updates store with player Types
+   * 3. Navigates to next Component
+   * @param {Object} event callback
+   * @return {undefined}
+   */
   handleSubmit(e) {
     e.preventDefault();
 
@@ -39,10 +58,21 @@ class Instructions extends Component {
     this.navigateTo('/countdown');
   }
 
+  /**
+   * Navigates to supplied path
+   * @param {Object} path: The path where to navigate
+   * @return {undefined}
+   */
   navigateTo(path) {
     this.props.history.push(path);
   }
 
+
+  /**
+   * Given a game modality updates players in store with its type
+   * @param {String} gameModality: The modality of the game eg: mvsm (machine vs machine)
+   * @return {undefined}
+   */
   storeAddTypeToPlayer(gameModality) {
       const {players, playerActions} = this.props;
 
@@ -73,6 +103,11 @@ class Instructions extends Component {
       }
   }
 
+  /**
+   * Updates store with game rules
+   * @param {Object} rules: rules payload
+   * @return {undefined}
+   */
   storeAddNewGameRules(rules) {
     const {gameActions} = this.props;
     gameActions.addNewGameRules(rules);
