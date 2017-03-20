@@ -1,0 +1,35 @@
+// Display utilities
+.hidden {
+  visibility: hidden;
+}
+
+.hide {
+  display: none;
+}
+
+.centered-container {
+  display: table;
+  margin: 0 auto;
+}
+.centered-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+.centered-text {
+  text-align: center;
+}
+
+// Font utilities
+.f-medium {
+  font-size: 1.2em;
+}
+
+.bold {
+  font-family: "opensans-bold";
+}
+
+// Grid utilities
+.span6 {
+  width: 50%;
+  float: left;
+}

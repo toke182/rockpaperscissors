@@ -181,7 +181,7 @@ class Countdown extends Component {
   /*** Render Method ***/
   render() {
     const {game} = this.props;
-    const label = this.humanPlayers.length > 0 ? 'PRESS A BUTTON NOW' : 'GO';
+    const label = this.humanPlayers.length > 0 ? 'PRESS NOW' : 'GO';
     return (
       <div className="countdown bold centered-container">
         <div className="centered-content">

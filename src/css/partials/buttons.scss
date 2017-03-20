@@ -1,0 +1,32 @@
+button.arcade {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 40px;
+  margin: 10px 0 20px;
+  font-size: 25px;
+  font-family: "opensans-semibold";
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  color: $white;
+  background-color: $blue-10;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px $blue-100;
+
+  &:hover {
+    background-color: $blue-50;
+  }
+
+  &:active {
+    background-color: $blue-50;
+    box-shadow: 0 5px $blue-100;
+    transform: translateY(5px);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

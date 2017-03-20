@@ -1,0 +1,33 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "opensans-light";
+  color: $white;
+  background-color: $red-50;
+}
+
+* {
+  -mox-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+fieldset {
+  border: none;
+  > legend {
+    font-weight: bold;
+  }
+}

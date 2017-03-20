@@ -1,0 +1,41 @@
+.shape-left,
+.shape-right {
+  background-size: contain !important;
+  height: 400px;
+}
+
+.shape-left {
+  &.spock {
+    background: url("../img/spock-left.png") no-repeat left center;
+  }
+  &.lizzard {
+    background: url("../img/lizzard-left.png") no-repeat left center;
+  }
+  &.rock {
+    background: url("../img/rock-left.png") no-repeat left center;
+  }
+  &.scissors {
+    background: url("../img/scissors-left.png") no-repeat left center;
+  }
+  &.paper {
+    background: url("../img/paper-left.png") no-repeat left center;
+  }
+}
+
+.shape-right {
+  &.spock {
+    background: url("../img/spock-right.png") no-repeat right center;
+  }
+  &.lizzard {
+    background: url("../img/lizzard-right.png") no-repeat right center;
+  }
+  &.rock {
+    background: url("../img/rock-right.png") no-repeat right center;
+  }
+  &.scissors {
+    background: url("../img/scissors-right.png") no-repeat right center;
+  }
+  &.paper {
+    background: url("../img/paper-right.png") no-repeat right center;
+  }
+}

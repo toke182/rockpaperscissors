@@ -1,7 +1,11 @@
-body {
-	background-color: green;
+// Generics
+@import "partials/variables";
+@import "partials/globals";
+@import "partials/utilities";
+@import "partials/buttons";
+@import "partials/shapes";
 
-	h1 {
-		color: white;
-	}
-}
+// Page specific
+@import "pages/instructions";
+@import "pages/countdown";
+@import "pages/results";
