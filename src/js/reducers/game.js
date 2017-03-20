@@ -10,6 +10,12 @@ export default function game(state = initialState, action) {
     case 'DECREMENT_SECONDS_REMAINING':
       return Object.assign({}, state, {secondsRemaining: state.secondsRemaining - 1});
 
+    case 'RESET_SECONDS_REMAINING':
+      return Object.assign({}, state, {secondsRemaining: initialState.secondsRemaining});
+
+    case 'RESTORE_INITIAL_STATE':
+      return Object.assign({}, initialState);
+
     default:
       return state;
   }

@@ -109,6 +109,8 @@ class Countdown extends Component {
   }
 
   componentWillUnmount() {
+    const {gameActions} = this.props;
+    gameActions.resetSecondsRemaining();
     clearInterval(this.countdownInterval);
   }
 

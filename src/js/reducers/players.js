@@ -1,12 +1,10 @@
 const initialState = [
   {
     id: 0,
-    handShape: 'rock',
     gameSide: 'left'
   },
   {
     id: 1,
-    handShape: 'scissors',
     gameSide: 'right'
   }
 ];
@@ -30,6 +28,9 @@ export default function players(state = initialState, action) {
       player.id === action.payload.id ?
         Object.assign({}, player, {winner: true}) : player
       );
+
+    case 'RESTORE_INITIAL_STATE':
+      return [...initialState];
 
     default:
       return state;

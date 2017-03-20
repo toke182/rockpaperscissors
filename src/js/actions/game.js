@@ -5,3 +5,11 @@ export function addNewGameRules(payload) {
 export function decrementSecondsRemaining(){
   return {type: 'DECREMENT_SECONDS_REMAINING'};
 }
+
+export function resetSecondsRemaining() {
+  return {type: 'RESET_SECONDS_REMAINING'};
+}
+
+export function restoreInitialState() {
+  return {type: 'RESTORE_INITIAL_STATE'};
+}

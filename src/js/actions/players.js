@@ -10,3 +10,7 @@ export function addHandShapeToPlayer(payload) {
 export function addWinner(payload) {
   return {type: 'ADD_WINNER', payload}
 }
+
+export function restoreInitialState() {
+  return {type: 'RESTORE_INITIAL_STATE'};
+}
